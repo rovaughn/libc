@@ -23,4 +23,16 @@ typedef _Bool bool;
 #define false 0
 #define NULL 0
 
+#include "static_assert.h"
+
+STATIC_ASSERT(i8, sizeof(i8) == 1)
+STATIC_ASSERT(i16, sizeof(i16) == 2)
+STATIC_ASSERT(i32, sizeof(i32) == 4)
+STATIC_ASSERT(i64, sizeof(i64) == 8)
+
+STATIC_ASSERT(u8, sizeof(u8) == 1)
+STATIC_ASSERT(u16, sizeof(u16) == 2)
+STATIC_ASSERT(u32, sizeof(u32) == 4)
+STATIC_ASSERT(u64, sizeof(u64) == 8)
+
 #endif

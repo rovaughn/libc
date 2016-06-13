@@ -1,23 +1,23 @@
 #include "io.h"
 #include "errors.h"
 
-static isize copy_buffer_unchecked(w, r, buf, len)
-    writer w;
-    reader r;
+static isize io_copy_buffer_unchecked(w, r, buf, len)
+    writer *w;
+    reader *r;
     byte *buf;
     usize len;
 {
     usize written = 0;
 
     for (;;) {
-        isize nr = r(buf, len);
+        isize nr = r->read(r, buf, len);
 
         if (nr == ERR_EOF) {
             return (isize)written;
         } else if (nr < 0) {
             return nr;
         } else if (nr > 0) {
-            isize nw = w(buf, (usize)nr);
+            isize nw = w->write(w, buf, (usize)nr);
 
             if (nw < 0) {
                 return nw;
@@ -30,18 +30,18 @@ static isize copy_buffer_unchecked(w, r, buf, len)
     }
 }
 
-isize copy(w, r)
-    writer w;
-    reader r;
+isize io_copy(w, r)
+    writer *w;
+    reader *r;
 {
     byte buf[32*1024];
 
-    return copy_buffer_unchecked(w, r, buf, sizeof buf);
+    return io_copy_buffer_unchecked(w, r, buf, sizeof buf);
 }
 
-isize copy_buffer(w, r, buf, len)
-    writer w;
-    reader r;
+isize io_copy_buffer(w, r, buf, len)
+    writer *w;
+    reader *r;
     byte *buf;
     usize len;
 {
@@ -49,6 +49,6 @@ isize copy_buffer(w, r, buf, len)
         return ERR_ARG;
     }
 
-    return copy_buffer_unchecked(w, r, buf, len);
+    return io_copy_buffer_unchecked(w, r, buf, len);
 }
 

@@ -3,14 +3,14 @@
 #include "os.h"
 
 isize fputs(w, s)
-    writer w;
+    writer *w;
     string s;
 {
-    return w((const byte*)s, strlen(s));
+    return w->write(w, (const byte*)s, strlen(s));
 }
 
 isize fputd(w, n)
-    writer w;
+    writer *w;
     i64 n;
 {
     bool negative = n < 0;
@@ -32,11 +32,11 @@ isize fputd(w, n)
         result[--i] = '-';
     }
 
-    return w(&result[i], sizeof result - i);
+    return w->write(w, &result[i], sizeof result - i);
 }
 
 isize fputu(w, n)
-    writer w;
+    writer *w;
     u64 n;
 {
     byte result[20];
@@ -51,11 +51,11 @@ isize fputu(w, n)
         }
     }
 
-    return w(&result[i], sizeof result - i);
+    return w->write(w, &result[i], sizeof result - i);
 }
 
 isize fputx(w, n)
-    writer w;
+    writer *w;
     u64 n;
 {
     byte result[16];
@@ -77,30 +77,30 @@ isize fputx(w, n)
         }
     }
 
-    return w(&result[i], sizeof result - i);
+    return w->write(w, &result[i], sizeof result - i);
 }
 
 isize puts(s)
     string s;
 {
-    return fputs(stdout, s);
+    return fputs((writer*)stdout, s);
 }
 
 isize putd(n)
     i64 n;
 {
-    return fputd(stdout, n);
+    return fputd((writer*)stdout, n);
 }
 
 isize putu(n)
     u64 n;
 {
-    return fputu(stdout, n);
+    return fputu((writer*)stdout, n);
 }
 
 isize putx(n)
     u64 n;
 {
-    return fputx(stdout, n);
+    return fputx((writer*)stdout, n);
 }
 

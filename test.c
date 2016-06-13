@@ -1,12 +1,15 @@
 #include "fmt.h"
 #include "os.h"
-
-void _start(void);
+#include "runtime.h"
+#include "bufio.h"
 
 void _start() {
-    fputs(stdout, "Your number is ");
-    fputx(stdout, 0xfe3);
-    fputs(stdout, ".\n");
+    bufio_writer bw;
+
+    new_bufio_writer(&bw, (writer*)stdout);
+
+    fputs((writer*)&bw, "Your number is "); fputx((writer*)&bw, 0xfe3); fputs((writer*)&bw, ".\n");
+    bufio_flush(&bw);
 
     exit(0);
 }

@@ -2,9 +2,18 @@
 #define OS_H
 
 #include "types.h"
+#include "io.h"
 
-isize stdout(const byte *buf, usize len);
-isize stderr(const byte *buf, usize len);
+typedef struct {
+    write_fn w;
+    int fd;
+} fd_writer;
+
+isize write_fd(fd_writer *self, const byte *data, usize len);
+
+fd_writer *stdout;
+fd_writer *stderr;
+
 void __attribute__((noreturn)) exit(u64 error_code);
 
 #endif

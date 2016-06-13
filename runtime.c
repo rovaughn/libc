@@ -3,7 +3,7 @@
 #include "fmt.h"
 
 void __stack_chk_fail() {
-    fputs(stderr, "*** stack smashing detected: terminated ***\n");
+    fputs((writer*)stderr, "*** stack smashing detected: terminated ***\n");
     exit(1);
 }
 
