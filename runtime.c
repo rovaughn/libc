@@ -41,6 +41,17 @@ int __subvsi3(a, b)
     return c;
 }
 
+
+long __negvdi2(a)
+    long a;
+{
+    __asm__("neg %0"
+          : "+g" (a)
+    );
+
+    return a;
+}
+
 int __negvsi2(a)
     int a;
 {

@@ -5,8 +5,8 @@ void _start(void);
 
 void _start() {
     fputs(stdout, "Your number is ");
-    fputd(stdout, -125553);
-    fputs(stdout, "\n");
+    fputx(stdout, 0xfe3);
+    fputs(stdout, ".\n");
 
     exit(0);
 }

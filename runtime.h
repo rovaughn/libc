@@ -8,5 +8,6 @@ int __subvsi3(int a, int b);
 int __negvsi2(int a);
 int __mulvsi3(int a, int b);
 int __addvsi3(int a, int b);
+long __negvdi2(long a);
 
 #endif
