@@ -11,8 +11,8 @@ typedef struct {
 
 isize write_fd(fd_writer *self, const byte *data, usize len);
 
-fd_writer *stdout;
-fd_writer *stderr;
+extern fd_writer *stdout;
+extern fd_writer *stderr;
 
 void __attribute__((noreturn)) exit(u64 error_code);
 
