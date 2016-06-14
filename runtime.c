@@ -11,34 +11,24 @@ int __addvsi3(a, b)
     int a;
     int b;
 {
-    int c;
-
-    __asm__("mov %1, %%rax \n\
-             add %%rax, %2 \n\
-             mov %%eax, %0"
-          : "=g" (c)
-          : "g" (a), "g" (b)
-          : "%rax"
+    __asm__("add %0, %1"
+          : "+g" (a)
+          : "g0" (a), "g" (b)
     );
 
-    return c;
+    return a;
 }
 
 int __subvsi3(a, b)
     int a;
     int b;
 {
-    int c;
-
-    __asm__("mov %1, %%rax \n\
-             sub %%rax, %2 \n\
-             mov %%eax, %0"
-          : "=g" (c)
-          : "g" (a), "g" (b)
-          : "%rax"
+    __asm__("sub %0, %1"
+          : "+g" (a)
+          : "g0" (a), "g" (b)
     );
 
-    return c;
+    return a;
 }
 
 
@@ -66,17 +56,11 @@ int __mulvsi3(a, b)
     int a;
     int b;
 {
-    int c;
-
-    __asm__("mov %1, %%rax  \n\
-             mov %2, %%rbx  \n\
-             mul %%rbx      \n\
-             mov %%eax, %0"
-            : "=g" (c)
-            : "g" (a), "g" (b)
-            : "%eax", "%ebx"
+    __asm__("mul %1"
+          : "+A" (a)
+          : "A0" (a), "g" (b)
     );
 
-    return c;
+    return a;
 }
 
