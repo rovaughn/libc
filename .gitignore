@@ -2,3 +2,5 @@ test
 *.o
 all-test.c
 all.c
+compare
+compare-musl
