@@ -64,3 +64,15 @@ int __mulvsi3(a, b)
     return a;
 }
 
+char stack[1024*1024];
+
+void _start() {
+    __asm__ volatile("mov %0, %%rsp\n\
+                      mov %0, %%rbp"
+                   :
+                   : "g" (&stack[sizeof stack])
+    );
+
+    exit(main());
+}
+
