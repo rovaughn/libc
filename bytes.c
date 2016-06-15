@@ -7,10 +7,19 @@ void copy(dst, src, len)
 {
     byte *dstb = dst;
     const byte *srcb = src;
-    usize i;
 
-    for (i = 0; i < len; i++) {
-        dstb[i] = srcb[i];
+    if (dstb < srcb) {
+        usize i;
+
+        for (i = 0; i < len; i++) {
+            dstb[i] = srcb[i];
+        }
+    } else if (dstb > srcb) {
+        usize i;
+
+        for (i = len - 1; i >= 0; i--) {
+            dstb[i] = srcb[i];
+        }
     }
 }
 
