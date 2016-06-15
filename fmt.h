@@ -3,14 +3,16 @@
 
 #include "io.h"
 
-isize fputs(writer *w, string s);
-isize fputd(writer *w, i64 n);
-isize fputu(writer *w, u64 n);
-isize fputx(writer *w, u64 n);
+void fatal(string s);
 
-isize puts(string s);
-isize putd(i64 n);
-isize putu(u64 n);
-isize putx(u64 n);
+write_result fputs(writer *w, string s);
+write_result fputd(writer *w, i64 n);
+write_result fputu(writer *w, u64 n);
+write_result fputx(writer *w, u64 n);
+
+write_result puts(string s);
+write_result putd(i64 n);
+write_result putu(u64 n);
+write_result putx(u64 n);
 
 #endif

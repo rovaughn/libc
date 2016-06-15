@@ -11,9 +11,11 @@ typedef struct {
     writer   *dest;
     byte      buffer[BUFIO_BUFFER_SIZE];
     usize     filled;
+    error     err;
 } bufio_writer;
 
 void new_bufio_writer(bufio_writer *bw, writer *w);
-isize bufio_flush(bufio_writer *bw);
+write_result bufio_writer_flush(bufio_writer *bw);
+usize bufio_writer_available(bufio_writer *bw);
 
 #endif

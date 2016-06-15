@@ -1,15 +1,23 @@
 #include "fmt.h"
 #include "strings.h"
 #include "os.h"
+#include "syscall.h"
 
-isize fputs(w, s)
+void fatal(s)
+    string s;
+{
+    sys_write(2, (const byte*)s, strlen(s));
+    exit(1);
+}
+
+write_result fputs(w, s)
     writer *w;
     string s;
 {
     return w->write(w, (const byte*)s, strlen(s));
 }
 
-isize fputd(w, n)
+write_result fputd(w, n)
     writer *w;
     i64 n;
 {
@@ -35,7 +43,7 @@ isize fputd(w, n)
     return w->write(w, &result[i], sizeof result - i);
 }
 
-isize fputu(w, n)
+write_result fputu(w, n)
     writer *w;
     u64 n;
 {
@@ -54,7 +62,7 @@ isize fputu(w, n)
     return w->write(w, &result[i], sizeof result - i);
 }
 
-isize fputx(w, n)
+write_result fputx(w, n)
     writer *w;
     u64 n;
 {
@@ -80,25 +88,25 @@ isize fputx(w, n)
     return w->write(w, &result[i], sizeof result - i);
 }
 
-isize puts(s)
+write_result puts(s)
     string s;
 {
     return fputs((writer*)stdout, s);
 }
 
-isize putd(n)
+write_result putd(n)
     i64 n;
 {
     return fputd((writer*)stdout, n);
 }
 
-isize putu(n)
+write_result putu(n)
     u64 n;
 {
     return fputu((writer*)stdout, n);
 }
 
-isize putx(n)
+write_result putx(n)
     u64 n;
 {
     return fputx((writer*)stdout, n);

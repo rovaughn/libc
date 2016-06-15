@@ -4,6 +4,7 @@
 // https://gcc.gnu.org/onlinedocs/gccint/Integer-library-routines.html
 
 void __stack_chk_fail(void);
+long __addvdi3(long a, long b);
 int __subvsi3(int a, int b);
 int __negvsi2(int a);
 int __mulvsi3(int a, int b);

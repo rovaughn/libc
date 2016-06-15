@@ -7,12 +7,8 @@ valgrind: test
 strace: test
 	strace ./test >/dev/null
 
-all.c: bufio.c bytes.c fmt.c io.c os.c runtime.c strings.c syscall.c
-	cat $^ >$@
-
-test: all.c test.c
-	cat all.c test.c >all-test.c
-	./cc all-test.c -o $@
+test: bufio.c bytes.c fmt.c io.c os.c runtime.c strings.c syscall.c debug.c test.c
+	./cc -g $^ -o $@
 
 compare: compare.c
 	gcc -O3 -flto -static -s compare.c -o compare

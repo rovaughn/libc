@@ -19,6 +19,8 @@ typedef const char string[];
 
 typedef _Bool bool;
 
+typedef string *error;
+
 #define true 1
 #define false 0
 #define NULL 0
